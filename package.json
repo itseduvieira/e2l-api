@@ -6,6 +6,7 @@
     "debug": "DEBUG=* node node_modules/supervisor/lib/cli-wrapper.js bin/www"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "firebase-admin": "^9.2.0"
