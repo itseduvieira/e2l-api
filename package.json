@@ -1,0 +1,16 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node bin/www",
+    "debug": "DEBUG=* node node_modules/supervisor/lib/cli-wrapper.js bin/www"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "firebase-admin": "^9.2.0"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  }
+}
