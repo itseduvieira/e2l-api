@@ -32,4 +32,24 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.get('/', async (req, res) => {
+  let nextPageToken
+  let users = []
+
+  try {
+    do {
+      const listUsersResult = await admin.auth().listUsers(1000, nextPageToken)
+
+      users.push(...listUsersResult.users)
+
+      nextPageToken = listUsersResult.pageToken
+    } while(nextPageToken)
+
+    res.json(users)
+  } catch (error) {
+    throw error
+  }
+})
+
+
 module.exports = router
