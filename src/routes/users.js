@@ -7,6 +7,8 @@ const admin = require('firebase-admin')
 
 router.post('/', async (req, res) => {
   try {
+    admin.auth().languageCode = 'pt_BR'
+
     const created = await admin.auth().createUser({
       email: req.body.email,
       emailVerified: false,
@@ -23,6 +25,8 @@ router.post('/', async (req, res) => {
     await admin.auth().setCustomUserClaims(created.uid, claim)
 
     debug(created)
+
+    await user.sendEmailVerification()
 
     res.json(created)
   } catch (error) {
