@@ -7,8 +7,6 @@ const admin = require('firebase-admin')
 
 router.post('/', async (req, res) => {
   try {
-    admin.auth().languageCode = 'pt_BR'
-
     const created = await admin.auth().createUser({
       email: req.body.email,
       emailVerified: false,
@@ -26,7 +24,9 @@ router.post('/', async (req, res) => {
 
     debug(created)
 
-    await user.sendEmailVerification()
+    const link = await admin.auth().generateEmailVerificationLink(created.email, undefined)
+
+    await sendCustomVerificationEmail(created.email, created.displayName, link)
 
     res.json(created)
   } catch (error) {
@@ -55,5 +55,16 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.delete('/:uid', async (req, res) => {
+  try {
+
+    await admin.auth().deleteUser(req.params.uid)
+
+  } catch (error) {
+    debug(error)
+
+    res.status(500).json(error)
+  }
+})
 
 module.exports = router
