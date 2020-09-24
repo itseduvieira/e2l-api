@@ -3,11 +3,11 @@
 const express = require('express')
 const router = express.Router()
 const debug = require('debug')
-const { auth } = require('firebase-admin')
+const admin = require('firebase-admin')
 
 router.post('/', async (req, res) => {
   try {
-    const created = await auth.createUser({
+    const created = await admin.auth().createUser({
       email: req.body.email,
       emailVerified: false,
       password: req.body.password,
@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
     const claim = {}
     claim[req.body.role] = true
 
-    await auth.setCustomUserClaims(created.uid, claim)
+    await admin.auth().setCustomUserClaims(created.uid, claim)
 
     debug(created)
 
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
 
   try {
     do {
-      const listUsersResult = await auth.listUsers(1000, nextPageToken)
+      const listUsersResult = await admin.auth().listUsers(1000, nextPageToken)
 
       users.push(...listUsersResult.users)
 
@@ -54,7 +54,7 @@ router.get('/', async (req, res) => {
 router.delete('/:uid', async (req, res) => {
   try {
 
-    await auth.deleteUser(req.params.uid)
+    await admin.auth().deleteUser(req.params.uid)
 
     res.json({
       success: true
