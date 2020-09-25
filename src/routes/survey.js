@@ -12,8 +12,11 @@ router.post('/', async (req, res) => {
         const survey = new Survey(req.body)
 
         await survey.save()
+
+        res.json(survey)
     } catch (error) {
-        res.status(500).statusMessage(error)
+        debug(error)
+        res.status(500).json(error)
     }
 })
 
