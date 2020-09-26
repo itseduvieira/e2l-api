@@ -7,9 +7,10 @@ const mongoose = require('mongoose')
 
 router.post('/', async (req, res) => {
     try {
+        const data = req.body
         const surveySchema = new mongoose.Schema({}, { strict: false })
         const Survey = mongoose.model('Survey', surveySchema)
-        const survey = new Survey(req.body)
+        const survey = new Survey(data)
 
         await survey.save()
 
