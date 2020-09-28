@@ -2,7 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
-const debug = require('debug')
+const debug = require('debug')('e2l:api')
 const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
@@ -18,6 +18,7 @@ router.post('/', async (req, res) => {
         res.json(survey)
     } catch (error) {
         debug(error)
+        
         res.status(500).json(error)
     }
 })

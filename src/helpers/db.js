@@ -1,7 +1,7 @@
 'use strict'
 const config = require('../../config/constants')
 const mongoose = require('mongoose')
-const debug = require('debug')
+const debug = require('debug')('e2l:api')
 
 ;(async() => {
     try {

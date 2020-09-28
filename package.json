@@ -2,8 +2,9 @@
   "name": "api",
   "version": "0.0.1",
   "scripts": {
-    "start": "DEBUG=* & node bin/www",
-    "debug": "SET DEBUG=* & supervisor node bin/www"
+    "start": "node bin/www",
+    "debug-win": "SET DEBUG=* & supervisor node bin/www",
+    "debug-unix": "export DEBUG=* && supervisor node bin/www"
   },
   "dependencies": {
     "cors": "^2.8.5",
