@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
     })
 
     const claim = {}
-    claim[req.body.role] = true
+    claim[req.body.customClaims] = true
 
     await admin.auth().setCustomUserClaims(created.uid, claim)
 
@@ -47,6 +47,16 @@ router.get('/', async (req, res) => {
     } while(nextPageToken)
 
     res.json(users)
+  } catch (error) {
+    throw error
+  }
+})
+
+router.get('/:uid', async (req, res) => {
+  try {
+    let user = await admin.auth().getUser(req.params.uid)
+
+    res.json(user)
   } catch (error) {
     throw error
   }
