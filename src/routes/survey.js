@@ -3,7 +3,6 @@
 const express = require('express')
 const router = express.Router()
 const debug = require('debug')('e2l:api')
-const mongoose = require('mongoose')
 const Survey = require('../model/survey')
 
 router.post('/', async (req, res) => {
