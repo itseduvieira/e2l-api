@@ -2,7 +2,7 @@
 
 const express = require('express')
 const router = express.Router()
-const debug = require('debug')
+const debug = require('debug')('e2l:api')
 const admin = require('firebase-admin')
 
 router.post('/', async (req, res) => {
